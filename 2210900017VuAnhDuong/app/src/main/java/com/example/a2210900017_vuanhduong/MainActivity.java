@@ -140,7 +140,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onContextItemSelected(@NonNull MenuItem item) {
         if (sp == null) {
-            Toast.makeText(this, "Không có liên hệ nào được chọn", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Không có sản phẩm nào được chọn", Toast.LENGTH_SHORT).show();
             return super.onContextItemSelected(item);
         }
         if(item.getItemId()==R.id.mnuSua){
@@ -151,16 +151,16 @@ public class MainActivity extends AppCompatActivity {
         } else if (item.getItemId() == R.id.mnuXoa) {
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
             builder.setTitle("Xác nhận xóa")
-                    .setMessage("Bạn có chắc chắn muốn xóa liên hệ này không?")
+                    .setMessage("Bạn có chắc chắn muốn xóa sản phẩm này không?")
                     .setPositiveButton("Có", (dialog, which) -> {
                         try {
-                            db.delete("Contact", "Ma=?", new String[]{String.valueOf(sp.getMasp())});
+                            db.delete("SanPham", "masp=?", new String[]{String.valueOf(sp.getMasp())});
                             adapter.remove(sp);
                             adapter.notifyDataSetChanged();
-                            Toast.makeText(this, "Đã xóa liên hệ", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(this, "Đã xóa sản phẩm", Toast.LENGTH_SHORT).show();
                         } catch (Exception e) {
                             Log.e("Database Error", e.toString());
-                            Toast.makeText(this, "Không xóa được liên hệ", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(this, "Không xóa được sản phẩm", Toast.LENGTH_SHORT).show();
                         }
                     })
                     .setNegativeButton("Không", null)
